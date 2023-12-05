@@ -1,18 +1,18 @@
-from flask import Flask
-from redis import Redis
-import os, time #for correcting timezone
+from flask import Flask, request
+import os, time
 
 app = Flask(__name__)
-redis = Redis(host='redis', port=6379)
-
-os.environ['TZ'] = 'Asia/Ho_Chi_Minh'
-time.tzset()
+auth_key = os.getenv("AUTHORIZATION_KEY")
 
 @app.route('/')
 def hello():
-    count = redis.incr('hits')
-    print(time.strftime('%Y-%m-%d %H:%M:%S'))
-    return 'Hello World! I have been seen {} times.\n'.format(count)
+    now = time.strftime('%Y-%m-%d %H:%M:%S')
+    # print("---")
+    # print(request.headers.get('Authorization'), flush=True)
+    if request.headers.get('Authorization') == auth_key:
+        return str(now) + ": Authen succeed"
+    # read http body data: https://stackoverflow.com/questions/10434599/get-the-data-received-in-a-flask-request
+    return str(now) + ": who the hell r u 403", 403
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")#debug=True
+    app.run(host="0.0.0.0", debug=True)

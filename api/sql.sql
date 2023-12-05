@@ -30,3 +30,20 @@ VALUES (hoan3, hash3, email3@gmail.com, manager, bod);
 
 INSERT INTO servers (serial, cpu_cores, memory_gb, running_services, server_status, ip_address)
 VALUES (abc1234, 4, 8, product_api, in_use, 10.0.6.8);
+
+
+SOME NOTE:
+https://127.0.0.1/upload?key1=value1&key2=value2
+
+from flask import Flask, request
+app = Flask(__name__)
+
+@app.route('/upload')
+def upload():
+
+    key_1 = request.args.get('key1')
+    key_2 = request.args.get('key2')
+    print(key_1)
+    #--> value1
+    print(key_2)
+    #--> value2
