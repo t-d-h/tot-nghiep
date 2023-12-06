@@ -1,4 +1,6 @@
 
+CREATE DATABASE users;
+CREATE DATABASE servers;
 CREATE DATABASE databasename;
 
 CREATE TABLE users (

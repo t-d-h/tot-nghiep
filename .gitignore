@@ -1,1 +1,4 @@
 db_data/
+venv-env/
+front/front/__pycache__/
+polls/
