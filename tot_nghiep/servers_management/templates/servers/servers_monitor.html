@@ -1,0 +1,91 @@
+{% load static %}
+<script src="{% static 'javas.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css.css' %}">
+<html>
+<head>
+    <title>Server management</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+    #form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 300%;
+        border: 2px solid;
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #f1f1f1;
+    }
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 8px 100px; margin-bottom: 8px">
+        <a class="navbar-brand" href="/">IT assets management platform</a>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li>
+                    <a class="nav-link" href="/services">Service management<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/servers">Servers management<span class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{% url 'users' %}">User management<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <div>
+                <i>Logged in as {{ user }} </i>
+            </div>
+            <div>
+                <a class="nav-link" href="{% url 'change_password' %}" >Change password <span class="sr-only">(current)</span></a>
+            </div>
+            <div>
+                <a class="nav-link" href="{% url 'logout' %}" >Logout <span class="sr-only">(current)</span></a>
+            </div>
+        </div>
+    </nav>
+<div class="col-12 text-center" style="width:2000px; margin:20 auto;">
+    <h1>Server detail</h1>
+</div>
+
+
+<div class="row">
+    <div class="col-6 text-center">
+        <div class="card-body">
+            <h5 class="card-title">Server specs:</h5>
+            <div class="row">
+                <div class="col-6" style="text-align: right;">
+                    <div>Id</div>
+                    <div>Hostname</div>
+                    <div>Operating System</div>
+                    <div>CPU Model</div>
+                    <div>Memory</div>
+                    <div>Disks</div>
+                    <div>Running Service</div>
+                    <div>Status</div>
+                </div>
+                <div class="col-6" style="text-align: left;">
+                    <div>{{ id }}</div>
+                    <div>{{ server_name }}</div>
+                    <div>{{ os }}</div>
+                    <div>{{ cpu_model }}</div>
+                    <div>{{ memory }}</div>
+                    <div>{{ disk }}</div>
+                    <div>{{ active_service }}</div>
+                    <div>{{ status }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 text-center">
+        <div class="centered w-100">
+            <div class="w-100">{{ cpu_graphs|safe }}</div>
+            <div>{{ memory_graphs|safe }}</div>
+            {{ disk_graphs|safe }}        
+        </div>
+    </div>
+</div>
