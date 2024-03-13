@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader #test
-import datetime
+import datetime, os
 from .forms import *
 from django.contrib.auth import authenticate, login, logout 
 from servers_management.models import *
@@ -27,7 +27,13 @@ def index(request):
             server_table = ServerTable(Servers.objects.all())
             server_table.exclude =('active_service', 'edit_button', 'monitor_button')
             RequestConfig(request).configure(server_table)
+            cpu_graph = os.environ['CPU_GRAPH']
+            mem_graph = os.environ['MEMORY_GRAPH']
+            disk_graph = os.environ['DISK_GRAPH']
             return render(request, 'views/admin_view.html', {"server_table": server_table, 
+                "cpu_graph": cpu_graph,
+                "mem_graph" : mem_graph,
+                "disk_graph" : disk_graph,
                 "total_number_of_servers": total_number_of_servers,
                 "total_number_of_running_servers": total_number_of_running_servers,
                 "total_number_of_broken_servers": total_number_of_broken_servers,

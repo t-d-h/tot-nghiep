@@ -71,8 +71,9 @@
                 <strong><h1>Servers Overal health</h1></strong>
             </div>
         </div>
-        <iframe src="https://gr.itim.vn/d-solo/000000013/servers-overall-health?orgId=1&refresh=5m&from=1709098677224&to=1709120277224&panelId=1" width="900" height="200" frameborder="0"></iframe>
-        <iframe src="https://gr.itim.vn/d-solo/000000013/servers-overall-health?orgId=1&refresh=5m&from=1709098702580&to=1709120302581&panelId=8" width="900" height="200" frameborder="0"></iframe>
+        {{ cpu_graph|safe }}
+        {{ mem_graph|safe }}
+        {{ disk_graph|safe }}
     </div>
 </div>
 
